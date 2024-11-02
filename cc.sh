@@ -1,0 +1,2 @@
+gcc so_long_main.c so_long_utils.c Get_next_line/get_next_line.c Get_next_line/get_next_line_utils.c -Lminilibx-linux -lmlx_Linux -lX11 -lXext
+echo cc so_long_main.c so_long_utils.c Get_next_line/get_next_line.c Get_next_line/get_next_line_utils.c -Lminilibx-linux -lmlx_Linux -lX11 -lXext
