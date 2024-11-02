@@ -27,8 +27,9 @@ int main()
 	game.img.img = mlx_new_image(game.mlx, game.win_size.x, game.win_size.y);
 	game.img.addr = mlx_get_data_addr(game.img.img, &game.img.bits_per_pixel, &game.img.line_length, &game.img.endian);
 
-	draw_map(&game.img, game);
-	mlx_put_image_to_window(game.mlx, game.mlx_win, game.img.img, 0, 0);	
+	draw_map(&game.img, &game);
+	mlx_put_image_to_window(game.mlx, game.mlx_win, game.img.img, 0, 0);
+	mlx_put_image_to_window(game.mlx, game.mlx_win, game.player->img->img, game.player->pos->x, game.player->pos->y);
 
 	mlx_hook(game.mlx_win, 2, 1L<<0, escClose, &game);
 	mlx_hook(game.mlx_win, 17, 1L << 0, xClose, &game);

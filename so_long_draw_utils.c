@@ -44,7 +44,7 @@ void	draw_square(t_image *img, int size, t_vector2 *startPos, unsigned int color
 	return;
 }
 
-unsigned int	put_tile(char c, t_vector2 *pos, t_game game)
+unsigned int	put_tile(char c, t_vector2 *pos, t_game *game)
 {
 	unsigned int	color;
 
@@ -65,12 +65,12 @@ unsigned int	put_tile(char c, t_vector2 *pos, t_game game)
     else if (c == 'C')
     {
 		color = 0x0000FFFF;
-		spawn_object(coin, pos, game);
+		// spawn_object(coin, pos, game);
 	}
     else if (c == 'E')
     {
 		color = 0x00BE09FF;
-		spawn_object(door, pos, game);
+		// spawn_object(door, pos, game);
 	}
     return (color);
 }
@@ -104,27 +104,27 @@ char tile_index(char *map, t_vector2 *index)
 	return (c);
 }
 
-void	draw_map(t_image *img, t_game game)
+void	draw_map(t_image *img, t_game *game)
 {
 	int			xPos;
 	int			yPos;
 	t_vector2	*pos;
 	t_vector2	*index;
 
-	xPos = game.tiles_start_pos.x + game.border_size / 2;
-	yPos = game.tiles_start_pos.y + game.border_size / 2;
+	xPos = game->tiles_start_pos.x + game->border_size / 2;
+	yPos = game->tiles_start_pos.y + game->border_size / 2;
 	index = new_vector2(0, 0);
-	while (index->y < game.grid_size.y)
+	while (index->y < game->grid_size.y)
 	{
 		pos = new_vector2(xPos, yPos);
-		draw_square(img, game.tiles_size, pos, put_tile(tile_index(game.map, index), pos, game));
+		draw_square(img, game->tiles_size, pos, put_tile(tile_index(game->map, index), pos, game));
 		free(pos);
-		xPos += (game.tiles_start_pos.x + game.tiles_distance);
-		if (++index->x == game.grid_size.x)
+		xPos += (game->tiles_start_pos.x + game->tiles_distance);
+		if (++index->x == game->grid_size.x)
 		{
 			index->x = 0;
-			xPos = game.tiles_start_pos.x + game.border_size / 2;
-			yPos += (game.tiles_start_pos.y + game.tiles_distance);
+			xPos = game->tiles_start_pos.x + game->border_size / 2;
+			yPos += (game->tiles_start_pos.y + game->tiles_distance);
 			index->y++;
 		}
 	}
