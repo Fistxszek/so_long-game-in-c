@@ -16,6 +16,14 @@ enum e_obj_type
 	enemy
 };
 
+enum e_mov_dir
+{
+	up,
+	down,
+	right,
+	left
+};
+
 typedef struct  s_vector2
 {
 	int x;
@@ -39,13 +47,25 @@ typedef struct  s_obj
 	enum		e_obj_type type;
 }	t_obj;
 
+typedef struct s_node
+{
+	int				txtIndex;	
+	t_vector2		pos;
+	struct s_node	* next;
+} t_node;
+
 typedef struct s_game
 {
+	int			move_count;
+	int			coins_left;
 	void		*mlx;
 	void		*mlx_win;
 	t_image		img;
 	t_obj		*player;
+	char		tile_below;
 	char		*map;
+	char		*gameplay_map;
+	t_node		*map_list_head;
 	int			tiles_distance;
 	int			border_size;
 	int			tiles_size;
@@ -53,6 +73,8 @@ typedef struct s_game
 	t_vector2	win_size;
 	t_vector2	grid_size;
 }	t_game;
+
+
 
 char			*map_reader(int fd);
 int				map_size_x(char *map);
@@ -64,7 +86,13 @@ void			draw_map(t_image *img, t_game *game);
 char			tile_index(char *map, t_vector2 *index);
 unsigned int	put_tile(char c, t_vector2 *pos, t_game *game);
 int				xClose(t_game *img);
-int				escClose(int keycode, t_game *img);
+int				get_key_down(int keycode, t_game *img);
 void			closeXWindow(t_game *game);
 void			spawn_object(enum e_obj_type type, t_vector2 *pos, t_game *game);
+char			*clone_map(t_game game);
+void			get_map_state(t_game *game, enum e_mov_dir dir);
+int				update_map(t_game *game, int playerIndex, int moveDistance);
+void			draw_window(t_game game);
+void			move_player(enum e_mov_dir dir, t_game *game);
+int				count_coins(char *map);
 #endif

@@ -11,3 +11,19 @@ t_vector2	*new_vector2(int x, int y)
 	vec->y = y;
 	return (vec);
 }
+
+int	count_coins(char *map)
+{
+	int	i;
+	int	coins;
+
+	coins = 0;
+	i = 0;
+	while (map[i])
+	{
+		if (map[i] == 'C')
+			coins++;
+		i++;
+	}
+	return (coins);
+}

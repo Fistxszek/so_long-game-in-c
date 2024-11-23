@@ -18,8 +18,8 @@ void	spawn_object(enum e_obj_type type, t_vector2 *pos, t_game *game)
 		// {game->player->img->img = mlx_texture_to_image(game->mlx, mlx_load_png("./ludek.png"));
 
 	game->player->img->addr = mlx_get_data_addr(game->player->img->img, &game->player->img->bits_per_pixel, &game->player->img->line_length, &game->player->img->endian);
-	printf("%d\n", game->player->pos->x);
-			printf("%p\n", game->player->img->addr);
+	// printf("%d\n", game->player->pos->x);
+			// printf("%p\n", game->player->img->addr);
 	}
 		}
 	// mlx_put_image_to_window(game->mlx, game->mlx_win, game->player->img->img, game->player->pos->x, game->player->pos->y);

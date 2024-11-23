@@ -111,13 +111,20 @@ void	draw_map(t_image *img, t_game *game)
 	t_vector2	*pos;
 	t_vector2	*index;
 
+	game->map_list_head = (t_node *) malloc(sizeof(t_node));
+	if (game->map_list_head == NULL) 
+    	return;
+
+	game->map_list_head->txtIndex = 0;
+	game->map_list_head->next = NULL;	
+
 	xPos = game->tiles_start_pos.x + game->border_size / 2;
 	yPos = game->tiles_start_pos.y + game->border_size / 2;
 	index = new_vector2(0, 0);
 	while (index->y < game->grid_size.y)
 	{
 		pos = new_vector2(xPos, yPos);
-		draw_square(img, game->tiles_size, pos, put_tile(tile_index(game->map, index), pos, game));
+		draw_square(img, game->tiles_size, pos, put_tile(tile_index(game->gameplay_map, index), pos, game));
 		free(pos);
 		xPos += (game->tiles_start_pos.x + game->tiles_distance);
 		if (++index->x == game->grid_size.x)
